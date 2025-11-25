@@ -19,7 +19,6 @@
     position: relative;
   }
 
-  /* SIDE IMAGES */
   body::before {
     content: '';
     position: fixed;
@@ -102,7 +101,6 @@
     color: white;
   }
 
-  /* BUTTON */
   #newPostBtn {
     display: block;
     margin: 0 auto;
@@ -120,7 +118,6 @@
     background-color: #e1eeff;
   }
 
-  /* POSTS */
   .posts-container {
     margin-top: 20px;
   }
@@ -144,7 +141,6 @@
     margin-bottom: 10px;
   }
 
-  /* POPUP */
   #postModal {
     position: fixed;
     inset: 0;
@@ -237,7 +233,6 @@
   <p>&copy; 2025 Tutorial Whizz. All rights reserved.</p>
 </footer>
 
-<!-- POST MODAL -->
 <div id="postModal">
   <div class="modal-content">
     <h2>Create a Post</h2>
@@ -277,7 +272,6 @@ function setupUserStatus() {
     });
 }
 
-/* LOAD POSTS */
 function loadPosts() {
   const container = document.getElementById("postsContainer");
   container.innerHTML = "";
@@ -300,7 +294,6 @@ function loadPosts() {
     });
 }
 
-/* MODAL */
 document.getElementById("newPostBtn").onclick = () => {
   document.getElementById("postModal").style.display = "flex";
 };
@@ -333,3 +326,4 @@ document.getElementById("submitPost").onclick = () => {
 
 </body>
 </html>
+
