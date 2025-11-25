@@ -14,7 +14,6 @@
       overflow-x: hidden;
     }
 
-    /* ------- HEADER (from Game Selection) ------- */
     header {
       width: 100%;
       background-color: #1f2937;
@@ -29,7 +28,6 @@
       z-index: 20;
     }
 
-    /* Navbar */
     nav {
       width: 100%;
       background-color: #1f2937;
@@ -52,10 +50,9 @@
 
     nav a:hover { color: #e1eeff; }
 
-    /* Top-right user status */
     #userStatus {
       position: fixed;
-      top: 85px; /* below header */
+      top: 85px;
       right: 20px;
       display: flex;
       align-items: center;
@@ -80,7 +77,6 @@
       background-color: #0e100e;
     }
 
-    /* Page layout */
     .container {
       max-width: 900px;
       margin: 140px auto 40px; /* pushed down for header + nav */
@@ -127,7 +123,6 @@
       }
     }
 
-    /* ------- FOOTER (from Game Selection) ------- */
     footer {
       width: 100%;
       background-color: #1f2937;
@@ -143,12 +138,10 @@
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
     Tutorial Whizz
   </header>
 
-  <!-- Navbar -->
   <nav>
     <a href="home.html">Home</a>
     <a id="profileLink" href="profile.html">Profile</a>
@@ -160,7 +153,6 @@
     <a href="community.html">Community</a>
   </nav>
 
-  <!-- Top-right user status -->
   <div id="userStatus">
     <span id="welcomeText">Welcome, Guest!</span>
     <button id="logoutBtn">Log Out</button>
@@ -241,3 +233,4 @@ window.onload = function() {
 
 </body>
 </html>
+
