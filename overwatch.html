@@ -225,16 +225,13 @@
     const welcomeText = document.getElementById('welcomeText');
     const logoutBtn = document.getElementById('logoutBtn');
 
-    // Fetch session info from Flask backend
     fetch('/session-check')
       .then(res => res.json())
       .then(data => {
         if (data.logged_in) {
-          // Hide login/signup
           loginLink.style.display = 'none';
           signupLink.style.display = 'none';
 
-          // Show welcome & logout
           welcomeText.textContent = `Welcome, ${data.username}!`;
           logoutBtn.style.display = 'inline-block';
 
@@ -245,7 +242,6 @@
               .then(() => window.location.reload());
           };
         } else {
-          // Not logged in
           loginLink.style.display = 'inline';
           signupLink.style.display = 'inline';
           welcomeText.textContent = 'Welcome, Guest!';
@@ -260,3 +256,4 @@
 </script>
 </body>
 </html>
+
