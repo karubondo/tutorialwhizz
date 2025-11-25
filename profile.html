@@ -15,7 +15,6 @@
     overflow-x: hidden;
   }
 
-  /* ------- HEADER (from home.html) ------- */
   header {
     width: 100%;
     background-color: #1f2937;
@@ -30,7 +29,6 @@
     z-index: 20;
   }
 
-  /* ------- NAVBAR (from home.html) ------- */
   nav {
     width: 100%;
     background-color: #1f2937;
@@ -51,7 +49,6 @@
   }
   nav a:hover { color: #e1eeff; }
 
-  /* User Status (moved down like home.html) */
   #userStatus {
     position: fixed;
     top: 85px;
@@ -123,7 +120,6 @@
   }
   button:hover { background-color: #e1eeff; color: #000; }
 
-  /* ------- FOOTER (from home.html) ------- */
   footer {
     width: 100%;
     background-color: #1f2937;
@@ -141,12 +137,10 @@
 
 <body>
 
-<!-- Header -->
 <header>
   Tutorial Whizz
 </header>
 
-<!-- Navbar -->
 <nav>
   <a id="loginLink" href="login.html">Login</a>
   <a id="signupLink" href="signup.html">Sign Up</a>
@@ -158,13 +152,11 @@
   <a href="community.html">Community</a>
 </nav>
 
-<!-- User Status -->
 <div id="userStatus">
   <span id="welcomeText">Welcome, Guest</span>
   <button id="logoutBtn">Log Out</button>
 </div>
 
-<!-- Page Content -->
 <div class="container">
   <div class="profile-section">
     <h2>Edit Profile</h2>
@@ -192,7 +184,7 @@
   </div>
 </div>
 
-<!-- Scripts -->
+
 <script>
 // ---------------------------
 // Load Session Info and toggle login/signup links
@@ -304,3 +296,4 @@ document.getElementById("logoutBtn").onclick = () => {
 
 </body>
 </html>
+
