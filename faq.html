@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ | Tutorial Whizz</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    /* ------- HEADER (from Game Selection) ------- */
+    header {
+      width: 100%;
+      background-color: #1f2937;
+      padding: 20px 0;
+      text-align: center;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 20;
+    }
+
+    /* Navbar */
+    nav {
+      width: 100%;
+      background-color: #1f2937;
+      padding: 15px 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: fixed;
+      top: 70px; /* below header */
+      left: 0;
+      z-index: 10;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover { color: #e1eeff; }
+
+    /* Top-right user status */
+    #userStatus {
+      position: fixed;
+      top: 85px; /* below header */
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-weight: bold;
+      z-index: 11;
+    }
+
+    #logoutBtn {
+      padding: 5px 10px;
+      cursor: pointer;
+      display: none;
+      font-weight: bold;
+      background-color: #0e100e;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+
+    #logoutBtn:hover {
+      background-color: #0e100e;
+    }
+
+    /* Page layout */
+    .container {
+      max-width: 900px;
+      margin: 140px auto 40px; /* pushed down for header + nav */
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #004aad;
+      margin-bottom: 20px;
+    }
+
+    .faq-item {
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      padding: 15px 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .faq-item h2 {
+      font-size: 20px;
+      margin: 0 0 10px 0;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: #ccc;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .faq-item.active p {
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 10px;
+      }
+    }
+
+    /* ------- FOOTER (from Game Selection) ------- */
+    footer {
+      width: 100%;
+      background-color: #1f2937;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    Tutorial Whizz
+  </header>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="home.html">Home</a>
+    <a id="profileLink" href="profile.html">Profile</a>
+    <a id="loginLink" href="login.html">Login</a>
+    <a id="signupLink" href="signup.html">Sign Up</a>
+    <a href="feedback.html">Feedback</a>
+    <a href="progress.html">Progress Tracker</a>
+    <a href="about.html">About Us</a>
+    <a href="community.html">Community</a>
+  </nav>
+
+  <!-- Top-right user status -->
+  <div id="userStatus">
+    <span id="welcomeText">Welcome, Guest!</span>
+    <button id="logoutBtn">Log Out</button>
+  </div>
+
+  <div class="container">
+    <h1>Frequently Asked Questions</h1>
+
+    <div class="faq-item">
+      <h2>How do I create an account?</h2>
+      <p>Click the Sign Up link in the navbar, fill in your email and password, and submit the form. Your account will be created instantly.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>What if I forget my password?</h2>
+      <p>Currently, there is no password recovery system. You will need to create a new account if you forget your password.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>How do I track my progress?</h2>
+      <p>Navigate to the Progress Tracker page to see your game statistics and progress over time.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>Can I edit my profile information?</h2>
+      <p>Yes, click the Profile link in the navbar to update your username, email, or other profile settings.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>How do I provide feedback?</h2>
+      <p>Click the Feedback link in the navbar and fill out the form to send your suggestions or report issues.</p>
+    </div>
+  </div>
+
+ <script>
+window.onload = function() {
+  fetch("/session-check")
+    .then(res => res.json())
+    .then(data => {
+      const loginLink = document.getElementById('loginLink');
+      const signupLink = document.getElementById('signupLink');
+      const profileLink = document.getElementById('profileLink');
+      const welcomeText = document.getElementById('welcomeText');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      if (data.logged_in) {
+        loginLink.style.display = 'none';
+        signupLink.style.display = 'none';
+        welcomeText.textContent = `Welcome, ${data.username}!`;
+        logoutBtn.style.display = 'inline-block';
+        profileLink.href = 'profile.html';
+
+        logoutBtn.onclick = () => {
+          fetch("/logout").then(() => window.location.reload());
+        };
+      } else {
+        loginLink.style.display = 'inline';
+        signupLink.style.display = 'inline';
+        welcomeText.textContent = 'Welcome, Guest!';
+        logoutBtn.style.display = 'none';
+        profileLink.href = 'login.html';
+      }
+    });
+
+  // FAQ toggle functionality
+  const faqItems = document.querySelectorAll('.faq-item h2');
+  faqItems.forEach(item => {
+    item.addEventListener('click', () => {
+      item.parentElement.classList.toggle('active');
+    });
+  });
+};
+</script>
+
+<footer>
+  © 2025 Tutorial Whizz — All Rights Reserved
+</footer>
+
+</body>
+</html>

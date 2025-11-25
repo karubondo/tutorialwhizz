@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback | Tutorial Whizz</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #004aad;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* SIDE IMAGES */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 350px;
+    height: 100%;
+    background-image: url('images/whizz.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 350px;
+    height: 100%;
+    background-image: url('images/whizz.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: scaleX(-1);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background-color: #1f2937;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  header h1, header p {
+    margin: 0;
+  }
+
+  nav {
+    width: 100%;
+    background-color: #1f2937;
+    padding: 10px 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+  }
+
+  nav a:hover { color: #e1eeff; }
+
+  main {
+    flex: 1;
+    padding: 40px;
+    max-width: 900px;
+    margin: auto;
+    background-color: #121212;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    text-align: center;
+    color: white;
+  }
+
+  .info-box {
+    background-color: #1e1e1e;
+    border-left: 4px solid #e1eeff;
+    padding: 15px;
+    margin: 20px auto;
+    border-radius: 6px;
+  }
+
+  textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px;
+    background-color: #1e1e1e;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    resize: none;
+  }
+
+  button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #004aad;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #e1eeff;
+    color: black;
+  }
+
+  .feedback-list {
+    margin-top: 30px;
+  }
+
+  .feedback-item {
+    background-color: #1e1e1e;
+    border-left: 4px solid #e1eeff;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+  }
+
+  .feedback-header {
+    font-weight: bold;
+    color: #e1eeff;
+  }
+
+  .feedback-date {
+    font-size: 12px;
+    color: #bbb;
+    margin-bottom: 8px;
+  }
+
+  footer {
+    background-color: #1f2937;
+    text-align: center;
+    padding: 15px;
+    position: relative;
+    z-index: 1;
+  }
+</style>
+
+</head>
+<body>
+
+<header>
+  <h1>Tutorial Whizz</h1>
+</header>
+
+<nav>
+  <a href="home.html">Home</a>
+  <a href="profile.html">Profile</a>
+  <a href="login.html" id="loginLink">Login</a>
+  <a href="signup.html" id="signupLink">Sign Up</a>
+  <a href="faq.html">FAQ</a>
+  <a href="community.html">Community</a>
+  <a href="feedback.html">Feedback</a>
+  <a href="about.html">About Us</a>
+  <a href="progress.html">Progress Tracker</a>
+</nav>
+
+<main>
+  <h1>Feedback</h1>
+
+  <div class="info-box">
+    <p>We value your thoughts. Tell us how we can improve.</p>
+  </div>
+
+  <textarea id="feedbackInput" placeholder="Type your feedback here..."></textarea>
+  <button onclick="submitFeedback()">Submit Feedback</button>
+
+  <div id="feedbackList" class="feedback-list" style="display:none;"></div>
+</main>
+
+<footer>
+  <p>&copy; 2025 Tutorial Whizz. All rights reserved.</p>
+</footer>
+
+<script>
+async function loadUserStatus() {
+  const res = await fetch("/session-check");
+  const data = await res.json();
+
+  const loginLink = document.getElementById("loginLink");
+  const signupLink = document.getElementById("signupLink");
+
+  if (data.logged_in) {
+    loginLink.style.display = "none";
+    signupLink.style.display = "none";
+
+    if (data.email === "jrmanipor1@gmail.com") {
+      loadAllFeedback();
+    }
+  } else {
+    loginLink.style.display = "inline";
+    signupLink.style.display = "inline";
+  }
+}
+
+async function submitFeedback() {
+  const text = document.getElementById("feedbackInput").value.trim();
+  if (!text) return alert("Please type feedback before submitting.");
+
+  const res = await fetch("/api/feedback", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ message: text })
+  });
+
+  const data = await res.json();
+
+  if (data.error) {
+    alert(data.error);
+    return;
+  }
+
+  document.getElementById("feedbackInput").value = "";
+  alert("Thank you! Your feedback has been submitted.");
+}
+
+async function loadAllFeedback() {
+  const container = document.getElementById("feedbackList");
+
+  const res = await fetch("/api/feedback");
+  const data = await res.json();
+
+  if (data.error) return;
+
+  container.style.display = "block";
+  container.innerHTML = "<h2 style='color:#e1eeff;'>Submitted Feedback</h2>";
+
+  data.forEach(item => {
+    container.innerHTML += `
+      <div class="feedback-item">
+        <div class="feedback-header">${item.user_email}</div>
+        <div class="feedback-date">${item.date}</div>
+        <div>${item.message}</div>
+      </div>`;
+  });
+}
+
+window.onload = () => loadUserStatus();
+</script>
+
+</body>
+</html>

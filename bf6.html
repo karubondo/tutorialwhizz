@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Battlefield 6 Tutorial | Tutorial Whizz</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #1f2937;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    nav {
+      width: 100%;
+      background-color: #1f2937;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    nav a:hover { text-decoration: underline; }
+
+    #userStatus {
+      position: fixed;
+      top: 15px;
+      right: 25px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: bold;
+    }
+
+    #logoutBtn {
+      padding: 5px 10px;
+      background-color: #0e100e;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      display: none;
+    }
+
+    #logoutBtn:hover {
+      background-color: #111611;
+    }
+
+    main {
+      flex: 1;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 20px auto;
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      color: #ffffff;
+      position: relative;
+      z-index: 1;
+    }
+
+    .left-side {
+      flex: 1 1 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .left-side img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .left-side img:hover {
+      transform: scale(1.05);
+    }
+
+    .right-side {
+      flex: 1 1 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    h1, h2 {
+      margin-top: 0;
+      color: #e1eeff;
+    }
+
+    p, ul {
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    footer {
+      background-color: #1f2937;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        flex-direction: column;
+        align-items: center;
+      }
+      .left-side, .right-side {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Tutorial Whizz</h1>
+    <p>Your ultimate guide to Battlefield 6</p>
+  </header>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="home.html">Home</a>
+    <a id="profileLink" href="profile.html">Profile</a>
+    <a id="loginLink" href="login.html">Login</a>
+    <a id="signupLink" href="signup.html">Sign Up</a>
+    <a href="faq.html">FAQ</a>
+    <a href="community.html">Community</a>
+    <a href="feedback.html">Feedback</a>
+    <a href="progress.html">Progress Tracker</a>
+    <a href="about.html">About Us</a>
+  </nav>
+
+  <!-- Top-right user status -->
+  <div id="userStatus">
+    <span id="welcomeText">Welcome, Guest!</span>
+    <button id="logoutBtn">Log Out</button>
+  </div>
+
+  <!-- Main content -->
+  <main>
+    <div class="left-side">
+      <a href="https://www.youtube.com/watch?v=DEX72tfm1ZU" target="_blank">
+        <img src="images/batolfiel6.png" alt="Battlefield 6">
+      </a>
+    </div>
+
+    <div class="right-side">
+      <h1>Battlefield 6 Tutorial</h1>
+      <p>Welcome to the Battlefield 6 tutorial! In this guide, you will learn essential gameplay mechanics, map strategies, weapon loadouts, and advanced tactics to excel on the battlefield.</p>
+      
+      <h2>Getting Started</h2>
+      <p>Choose your soldier class wisely: Assault, Medic, Engineer, or Recon. Each class has unique equipment and weapons that complement different playstyles. Familiarize yourself with movement controls, sprinting, prone, and cover mechanics.</p>
+      
+      <h2>Weapons and Loadouts</h2>
+      <p>Select the right weapon for the map and engagement range. Assault rifles are versatile, sniper rifles excel at long-range combat, and shotguns dominate close quarters. Customize your loadout with attachments, grenades, and gadgets to match your strategy.</p>
+      
+      <h2>Combat Strategies</h2>
+      <ul>
+        <li>Always take cover during firefights to reduce incoming damage.</li>
+        <li>Use suppression fire to limit enemy mobility and create openings.</li>
+        <li>Coordinate with teammates for flanking maneuvers and combined assaults.</li>
+        <li>Master the use of vehicles for fast movement, heavy firepower, and map control.</li>
+      </ul>
+      
+      <h2>Map Knowledge</h2>
+      <p>Learn the layout of each map, including high ground, chokepoints, and objective locations. Controlling key areas can give your team a decisive advantage. Watch for spawn points and plan routes for quick rotations.</p>
+      
+      <h2>Team Play</h2>
+      <p>Battlefield 6 rewards teamwork. Support your squad with revives, ammo, and healing. Communicate using voice or text to call out enemy positions and coordinate attacks.</p>
+      
+      <h2>Advanced Tips</h2>
+      <ul>
+        <li>Learn to manage weapon recoil and optimize burst firing for accuracy.</li>
+        <li>Use gadgets like mines, tripwires, and UAVs strategically to control the battlefield.</li>
+        <li>Adapt your tactics based on the evolving game situation and enemy behavior.</li>
+        <li>Participate in ranked and team objective modes to refine skills under pressure.</li>
+      </ul>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Tutorial Whizz. All rights reserved.</p>
+  </footer>
+
+  <!-- Session JS -->
+  <script>
+    window.onload = function() {
+      const loginLink = document.getElementById('loginLink');
+      const signupLink = document.getElementById('signupLink');
+      const profileLink = document.getElementById('profileLink');
+      const welcomeText = document.getElementById('welcomeText');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      fetch('/session-check')
+        .then(res => res.json())
+        .then(data => {
+          if (data.logged_in) {
+            loginLink.style.display = 'none';
+            signupLink.style.display = 'none';
+            welcomeText.textContent = `Welcome, ${data.username}!`;
+            logoutBtn.style.display = 'inline-block';
+            profileLink.href = 'profile.html';
+            logoutBtn.onclick = () => fetch('/logout').then(() => window.location.reload());
+          } else {
+            loginLink.style.display = 'inline';
+            signupLink.style.display = 'inline';
+            welcomeText.textContent = 'Welcome, Guest!';
+            logoutBtn.style.display = 'none';
+            profileLink.href = 'login.html';
+          }
+        })
+        .catch(err => console.error('Session check failed:', err));
+    };
+  </script>
+</body>
+</html>

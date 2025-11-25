@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overwatch 2 Tutorial | Tutorial Whizz</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #1f2937;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    nav {
+      width: 100%;
+      background-color: #1f2937;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    nav a:hover { text-decoration: underline; }
+
+    #userStatus {
+      position: fixed;
+      top: 15px;
+      right: 25px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: bold;
+    }
+
+    #logoutBtn {
+      padding: 5px 10px;
+      background-color: #0e100e;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      display: none;
+    }
+
+    #logoutBtn:hover {
+      background-color: #111611;
+    }
+
+    main {
+      flex: 1;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 20px auto;
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      color: #ffffff;
+      position: relative;
+      z-index: 1;
+    }
+
+    .left-side {
+      flex: 1 1 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .left-side img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .left-side img:hover {
+      transform: scale(1.05);
+    }
+
+    .right-side {
+      flex: 1 1 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    h1, h2 {
+      margin-top: 0;
+      color: #e1eeff;
+    }
+
+    p, ul {
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    footer {
+      background-color: #1f2937;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        flex-direction: column;
+        align-items: center;
+      }
+      .left-side, .right-side {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Tutorial Whizz</h1>
+    <p>Your ultimate guide to mastering Overwatch 2</p>
+  </header>
+
+  <nav>
+    <a href="home.html">Home</a>
+    <a id="profileLink" href="profile.html">Profile</a>
+    <a id="loginLink" href="login.html">Login</a>
+    <a id="signupLink" href="signup.html">Sign Up</a>
+    <a href="faq.html">FAQ</a>
+    <a href="community.html">Community</a>
+    <a href="feedback.html">Feedback</a>
+    <a href="progress.html">Progress Tracker</a>
+  </nav>
+
+  <div id="userStatus">
+    <span id="welcomeText">Welcome, Guest!</span>
+    <button id="logoutBtn">Log Out</button>
+  </div>
+
+  <main>
+    <div class="left-side">
+      <a href="https://www.youtube.com/watch?v=u2mMbSKf6iE" target="_blank">
+        <img src="images/ow2kir.avif" alt="Overwatch 2">
+      </a>
+    </div>
+
+    <div class="right-side">
+      <h1>Overwatch 2 Tutorial</h1>
+      <p>Welcome to your ultimate Overwatch 2 guide! Learn how to improve your gameplay, win more matches, and become a key player in your team.</p>
+      
+      <h2>Getting Started</h2>
+      <p>Choose heroes based on team composition and map. Each hero has unique abilities—understand them to optimize your impact.</p>
+      
+      <h2>Combat Tips</h2>
+      <ul>
+        <li>Prioritize high-value targets like healers or damage dealers.</li>
+        <li>Use ultimate abilities strategically, not impulsively.</li>
+        <li>Stay aware of enemy cooldowns and positioning.</li>
+        <li>Practice aim, movement, and ability timing for maximum efficiency.</li>
+      </ul>
+
+      <h2>Team Strategies</h2>
+      <ul>
+        <li>Communicate via voice or text to coordinate pushes and defenses.</li>
+        <li>Focus fire together to take down key enemies quickly.</li>
+        <li>Adapt hero picks based on enemy composition mid-match.</li>
+        <li>Control objectives and choke points instead of chasing kills.</li>
+      </ul>
+
+      <h2>Advanced Tips</h2>
+      <ul>
+        <li>Learn map layouts to use flanks and high ground effectively.</li>
+        <li>Counter-pick enemies with heroes that exploit weaknesses.</li>
+        <li>Track enemy ultimates to prevent devastating combos.</li>
+        <li>Analyze replays to identify mistakes and optimize strategy.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Tutorial Whizz. All rights reserved.</p>
+  </footer>
+
+  <script>
+  window.onload = function() {
+    const loginLink = document.getElementById('loginLink');
+    const signupLink = document.getElementById('signupLink');
+    const profileLink = document.getElementById('profileLink');
+    const welcomeText = document.getElementById('welcomeText');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Fetch session info from Flask backend
+    fetch('/session-check')
+      .then(res => res.json())
+      .then(data => {
+        if (data.logged_in) {
+          // Hide login/signup
+          loginLink.style.display = 'none';
+          signupLink.style.display = 'none';
+
+          // Show welcome & logout
+          welcomeText.textContent = `Welcome, ${data.username}!`;
+          logoutBtn.style.display = 'inline-block';
+
+          profileLink.href = 'profile.html';
+
+          logoutBtn.onclick = () => {
+            fetch('/logout')
+              .then(() => window.location.reload());
+          };
+        } else {
+          // Not logged in
+          loginLink.style.display = 'inline';
+          signupLink.style.display = 'inline';
+          welcomeText.textContent = 'Welcome, Guest!';
+          logoutBtn.style.display = 'none';
+          profileLink.href = 'login.html';
+        }
+      })
+      .catch(err => {
+        console.error('Session check failed:', err);
+      });
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community | Tutorial Whizz</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #004aad;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* SIDE IMAGES */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 350px;
+    height: 100%;
+    background-image: url('images/whizz.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 350px;
+    height: 100%;
+    background-image: url('images/whizz.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: scaleX(-1);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background-color: #1f2937;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  header h1, header p {
+    margin: 0;
+  }
+
+  nav {
+    width: 100%;
+    background-color: #1f2937;
+    padding: 10px 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  nav a, nav button {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  nav a:hover { color: #e1eeff; }
+
+  main {
+    flex: 1;
+    padding: 40px;
+    max-width: 900px;
+    margin: auto;
+    background-color: #121212;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    text-align: center;
+    color: white;
+  }
+
+  /* BUTTON */
+  #newPostBtn {
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #004aad;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  #newPostBtn:hover {
+    background-color: #e1eeff;
+  }
+
+  /* POSTS */
+  .posts-container {
+    margin-top: 20px;
+  }
+
+  .post-card {
+    background-color: #1e1e1e;
+    border-left: 4px solid #e1eeff;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+  }
+
+  .post-header {
+    font-weight: bold;
+    color: #e1eeff;
+  }
+
+  .post-date {
+    font-size: 12px;
+    color: #bbb;
+    margin-bottom: 10px;
+  }
+
+  /* POPUP */
+  #postModal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .modal-content {
+    background-color: #1f1f1f;
+    padding: 20px;
+    width: 40%;
+    border-radius: 8px;
+  }
+
+  .modal-content textarea {
+    width: 100%;
+    height: 150px;
+    background-color: #121212;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    resize: none;
+  }
+
+  .modal-actions {
+    margin-top: 10px;
+    text-align: right;
+  }
+
+  .modal-actions button {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  #cancelPost {
+    background-color: #444;
+    color: white;
+    margin-right: 10px;
+  }
+
+  #submitPost {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  footer {
+    background-color: #1f2937;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: relative;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Tutorial Whizz</h1>
+</header>
+
+<nav>
+  <a href="home.html">Home</a>
+  <a id="profileLink" href="profile.html">Profile</a>
+  <button id="loginButton" onclick="location.href='login.html'">Log In</button>
+  <a href="faq.html">FAQ</a>
+  <a href="feedback.html">Feedback</a>
+  <a id="signupLink" href="signup.html">Sign Up</a>
+  <a href="about.html">About Us</a>
+  <a href="feedback.html">Feedback</a>
+  <a href="progress.html">Progress Tracker</a>
+</nav>
+
+<main>
+  <h1>Community Posts</h1>
+
+  <button id="newPostBtn">Create New Post</button>
+
+  <div class="posts-container" id="postsContainer"></div>
+</main>
+
+<footer>
+  <p>&copy; 2025 Tutorial Whizz. All rights reserved.</p>
+</footer>
+
+<!-- POST MODAL -->
+<div id="postModal">
+  <div class="modal-content">
+    <h2>Create a Post</h2>
+    <textarea id="postInput" placeholder="Write your post..."></textarea>
+    <div class="modal-actions">
+      <button id="cancelPost">Cancel</button>
+      <button id="submitPost">Post</button>
+    </div>
+  </div>
+</div>
+
+<script>
+window.onload = () => {
+  setupUserStatus();
+  loadPosts();
+};
+
+function setupUserStatus() {
+  fetch("/session-check")
+    .then(res => res.json())
+    .then(data => {
+      const profileLink = document.getElementById('profileLink');
+      const loginButton = document.getElementById('loginButton');
+      const signupLink = document.getElementById('signupLink');
+
+      if (data.logged_in) {
+        profileLink.textContent = data.username;
+        profileLink.href = "profile.html";
+        loginButton.style.display = "none";
+        signupLink.style.display = "none";
+      } else {
+        profileLink.textContent = "Sign Up";
+        profileLink.href = "signup.html";
+        loginButton.style.display = "inline-block";
+        signupLink.style.display = "inline-block";
+      }
+    });
+}
+
+/* LOAD POSTS */
+function loadPosts() {
+  const container = document.getElementById("postsContainer");
+  container.innerHTML = "";
+
+  fetch("/api/posts")
+    .then(res => res.json())
+    .then(posts => {
+      posts.forEach(post => {
+        const card = document.createElement("div");
+        card.className = "post-card";
+
+        card.innerHTML = `
+          <div class="post-header">${post.user}</div>
+          <div class="post-date">${post.date}</div>
+          <div>${post.text}</div>
+        `;
+
+        container.appendChild(card);
+      });
+    });
+}
+
+/* MODAL */
+document.getElementById("newPostBtn").onclick = () => {
+  document.getElementById("postModal").style.display = "flex";
+};
+
+document.getElementById("cancelPost").onclick = () => {
+  document.getElementById("postInput").value = "";
+  document.getElementById("postModal").style.display = "none";
+};
+
+document.getElementById("submitPost").onclick = () => {
+  const text = document.getElementById("postInput").value.trim();
+  if (!text) return alert("Write something first!");
+
+  fetch("/api/posts", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text })
+  }).then(res => {
+    if (res.ok) {
+      document.getElementById("postInput").value = "";
+      document.getElementById("postModal").style.display = "none";
+      loadPosts();
+    } else {
+      res.json().then(data => alert(data.error || "Failed to post"));
+    }
+  });
+};
+</script>
+
+
+</body>
+</html>

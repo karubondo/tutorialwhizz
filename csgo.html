@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSGO Tutorial | Tutorial Whizz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #1f2937;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    nav {
+      width: 100%;
+      background-color: #1f2937;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    nav a:hover { text-decoration: underline; }
+
+    #userStatus {
+      position: fixed;
+      top: 15px;
+      right: 25px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: bold;
+    }
+
+    #logoutBtn {
+      padding: 5px 10px;
+      background-color: #0e100e;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      display: none;
+    }
+
+    #logoutBtn:hover {
+      background-color: #111611;
+    }
+
+    main {
+      flex: 1;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 20px auto;
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      color: #ffffff;
+      position: relative;
+      z-index: 1;
+    }
+
+    .left-side {
+      flex: 1 1 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .left-side img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .left-side img:hover {
+      transform: scale(1.05);
+    }
+
+    .right-side {
+      flex: 1 1 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    h1, h2 {
+      margin-top: 0;
+      color: #e1eeff;
+    }
+
+    p, ul {
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    footer {
+      background-color: #1f2937;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        flex-direction: column;
+        align-items: center;
+      }
+      .left-side, .right-side {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Tutorial Whizz</h1>
+    <p>Your ultimate guide to CSGO</p>
+  </header>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="home.html">Home</a>
+    <a id="profileLink" href="profile.html">Profile</a>
+    <a id="loginLink" href="login.html">Login</a>
+    <a id="signupLink" href="signup.html">Sign Up</a>
+    <a href="faq.html">FAQ</a>
+    <a href="community.html">Community</a>
+    <a href="feedback.html">Feedback</a>
+    <a href="progress.html">Progress Tracker</a>
+    <a href="about.html">About Us</a>
+  </nav>
+
+  <!-- Top-right user status -->
+  <div id="userStatus">
+    <span id="welcomeText">Welcome, Guest!</span>
+    <button id="logoutBtn">Log Out</button>
+  </div>
+
+  <!-- Main content -->
+  <main>
+    <div class="left-side">
+      <a href="https://www.youtube.com/watch?v=bJ1Flcla3SE" target="_blank">
+        <img src="images/csgo.avif" alt="CSGO">
+      </a>
+    </div>
+
+    <div class="right-side">
+      <h1>CSGO Tutorial</h1>
+      <p>Welcome to the CSGO tutorial! In this guide, you'll learn weapon strategies, map control, and team-based tactics to dominate matches.</p>
+
+      <h2>Getting Started</h2>
+      <p>Select your role: Entry Fragger, Support, AWPer, or Lurker. Each role has specific responsibilities during rounds. Learn movement mechanics like strafing, crouching, and peeking to gain advantages.</p>
+
+      <h2>Weapons and Loadouts</h2>
+      <p>Choose weapons based on map and strategy. Rifles like the AK-47 and M4A4 are versatile; the AWP excels at long-range pickoffs. Buy grenades and utility equipment wisely to control enemy movement and create openings.</p>
+
+      <h2>Combat Tips</h2>
+      <ul>
+        <li>Use crosshair placement to minimize reaction time during firefights.</li>
+        <li>Master recoil patterns for accurate shooting.</li>
+        <li>Check corners and listen for enemy footsteps.</li>
+        <li>Economy management is key: know when to save or buy.</li>
+      </ul>
+
+      <h2>Map Knowledge</h2>
+      <p>Learn callouts for each map, understand chokepoints, bombsites, and rotations. Controlling mid and high-traffic areas can change the round outcome.</p>
+
+      <h2>Team Play</h2>
+      <p>Communicate with teammates about enemy positions, utility usage, and strategies. Supporting teammates with flashes, smokes, and heals improves win rates.</p>
+
+      <h2>Advanced Tips</h2>
+      <ul>
+        <li>Master grenade lineups for smokes, flashes, and molotovs.</li>
+        <li>Time pushes with team coordination.</li>
+        <li>Study enemy patterns and adapt in-game strategies.</li>
+        <li>Participate in competitive matches to refine decision-making under pressure.</li>
+      </ul>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Tutorial Whizz. All rights reserved.</p>
+  </footer>
+
+  <!-- Session JS -->
+  <script>
+    window.onload = function() {
+      const loginLink = document.getElementById('loginLink');
+      const signupLink = document.getElementById('signupLink');
+      const profileLink = document.getElementById('profileLink');
+      const welcomeText = document.getElementById('welcomeText');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      fetch('/session-check')
+        .then(res => res.json())
+        .then(data => {
+          if (data.logged_in) {
+            loginLink.style.display = 'none';
+            signupLink.style.display = 'none';
+            welcomeText.textContent = `Welcome, ${data.username}!`;
+            logoutBtn.style.display = 'inline-block';
+            profileLink.href = 'profile.html';
+            logoutBtn.onclick = () => fetch('/logout').then(() => window.location.reload());
+          } else {
+            loginLink.style.display = 'inline';
+            signupLink.style.display = 'inline';
+            welcomeText.textContent = 'Welcome, Guest!';
+            logoutBtn.style.display = 'none';
+            profileLink.href = 'login.html';
+          }
+        })
+        .catch(err => console.error('Session check failed:', err));
+    };
+  </script>
+
+</body>
+</html>

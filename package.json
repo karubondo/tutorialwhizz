@@ -1,0 +1,20 @@
+{
+  "name": "hello-world-ts",
+  "version": "1.0.0",
+  "description": "A simple TypeScript project that logs 'Hello, World!' to the console.",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/app.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/hello-world-ts.git"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}

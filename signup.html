@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign Up</title>
+  <style>
+    :root {
+      --bg: #121212;        /* Dark gray background */
+      --card: #1e1e1e;      /* Slightly lighter card */
+      --accent: #2563eb;
+      --muted: #b0b0b0;     /* Lighter gray for labels/text */
+      --radius: 8px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background-color: var(--bg);
+      color: #ffffff;
+    }
+
+    .container {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .logo {
+      max-width: 200px;   /* Increased size */
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 24px rgba(16,24,40,0.3);
+      padding: 28px;
+      color: #ffffff;
+    }
+
+    h1 {
+      margin: 0 0 18px 0;
+      font-size: 20px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      padding: 12px 14px;
+      border: 1px solid #333;
+      border-radius: var(--radius);
+      font-size: 15px;
+      outline: none;
+      background-color: #2a2a2a;
+      color: #ffffff;
+      transition: box-shadow .12s, border-color .12s;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(37,99,235,0.3);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 10px 14px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      flex: 1;
+    }
+
+    .meta {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    a.login {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 6px;
+    }
+
+    @media (max-width: 420px) {
+      .card { padding: 20px; }
+      .logo { max-width: 150px; margin-bottom: 25px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="images/whizz.png" alt="Whizz Logo" class="logo" />
+
+    <main class="card" role="main">
+      <h1>Create Your Account</h1>
+
+      <form id="signupForm" action="/signup" method="post">
+  <div class="field">
+    <label for="email">Email address</label>
+    <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+  </div>
+
+  <div class="field">
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" autocomplete="new-password" placeholder="Enter your password" required />
+  </div>
+
+  <div class="actions">
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+  </div>
+</form>
+    </main>
+  </div>
+</body>
+</html>

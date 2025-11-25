@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Selection | Tutorial Whizz</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #121212;
+      overflow: hidden;
+    }
+
+    /* ------- HEADER (Copied from your other pages) ------- */
+    header {
+      width: 100%;
+      background-color: #1f2937;
+      padding: 20px 0;
+      text-align: center;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 20;
+    }
+
+    /* Navbar */
+    nav {
+      width: 100%;
+      background-color: #1f2937;
+      padding: 15px 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: fixed;
+      top: 70px; /* pushed down below header */
+      left: 0;
+      z-index: 10;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover { color: #e1eeff; }
+
+    /* Top-right welcome/logout */
+    #userStatus {
+      position: fixed;
+      top: 85px; /* adjusted for header presence */
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-weight: bold;
+      z-index: 11;
+    }
+
+    #logoutBtn {
+      padding: 5px 10px;
+      cursor: pointer;
+      display: none;
+      font-weight: bold;
+      background-color: #0e100e;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+
+    #logoutBtn:hover {
+      background-color: #0e100e;
+    }
+
+    /* Game area */
+    .game-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      width: 100%;
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .game-box {
+      width: 180px;
+      height: 180px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      background-color: #999999;
+    }
+
+    .game-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .game-box img {
+      max-width: 80%;
+      max-height: 80%;
+      object-fit: contain;
+    }
+
+    /* ------- FOOTER (Copied from your other pages) ------- */
+    footer {
+      width: 100%;
+      background-color: #1f2937;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    Tutorial Whizz
+  </header>
+
+  <!-- Navbar -->
+  <nav>
+    <a id="profileLink" href="profile.html">Profile</a>
+    <a id="loginLink" href="login.html">Login</a>
+    <a id="signupLink" href="signup.html">Sign Up</a>
+    <a href="about.html">About Us</a>
+    <a href="faq.html">FAQ</a>
+    <a href="feedback.html">Feedback</a>
+    <a href="progress.html">Progress Tracker</a>
+    <a href="community.html">Community</a>
+  </nav>
+
+  <!-- Top-right user status -->
+  <div id="userStatus">
+    <span id="welcomeText">Welcome, Guest!</span>
+    <button id="logoutBtn">Log Out</button>
+  </div>
+
+  <!-- Game Container -->
+  <div class="game-container">
+    <a href="csgo.html" class="game-box">
+      <img src="images/csgo.png" alt="CS:GO">
+    </a>
+    <a href="valorant.html" class="game-box">
+      <img src="images/valorant.png" alt="Valorant">
+    </a>
+    <a href="marvelriv.html" class="game-box">
+      <img src="images/marvelriv.png" alt="Marvel Rivals">
+    </a>
+    <a href="overwatch.html" class="game-box">
+      <img src="images/ow.png" alt="Overwatch">
+    </a>
+    <a href="bf6.html" class="game-box">
+      <img src="images/bf6.png" alt="Battlefield 6">
+    </a>
+  </div>
+
+  <script>
+window.onload = function() {
+  fetch("/session-check")
+    .then(res => res.json())
+    .then(data => {
+      const loginLink = document.getElementById('loginLink');
+      const signupLink = document.getElementById('signupLink');
+      const profileLink = document.getElementById('profileLink');
+      const welcomeText = document.getElementById('welcomeText');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      if (data.logged_in) {
+        loginLink.style.display = 'none';
+        signupLink.style.display = 'none';
+        logoutBtn.style.display = 'inline-block';
+        logoutBtn.onclick = () => window.location.href = "/logout";
+
+        fetch("/api/profile")
+          .then(res => res.json())
+          .then(profile => {
+            const username = profile.username || data.email.split('@')[0];
+            welcomeText.textContent = `Welcome, ${username}!`;
+          });
+      } else {
+        window.location.href = "/login.html";
+      }
+    });
+};
+</script>
+
+<footer>
+  © 2025 Tutorial Whizz — All Rights Reserved
+</footer>
+
+</body>
+</html>

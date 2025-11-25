@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progress Tracker | Tutorial Whizz</title>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #004aad;
+    color: #ffffff;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 350px;
+    height: 100%;
+    background-image: url('images/whizz.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 350px;
+    height: 100%;
+    background-image: url('images/whizz.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    z-index: 0;
+    transform: scaleX(-1);
+  }
+
+  header {
+    width: 100%;
+    background-color: #1f2937;
+    padding: 20px 0;
+    text-align: center;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+  }
+
+  nav {
+    width: 100%;
+    background-color: #1f2937;
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+
+  nav a:hover { color: #4CAF50; }
+
+  /* USER STATUS MOVES WITH NAVBAR */
+  #userStatus {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: bold;
+    z-index: 5;
+  }
+
+  #logoutBtn {
+    padding: 5px 10px;
+    background-color: #0e100e;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    display: none;
+  }
+
+  #logoutBtn:hover { background-color: #111611; }
+
+  .container {
+    flex: 1;
+    max-width: 900px;
+    margin: 40px auto 80px;
+    padding: 30px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 { color: white; margin-bottom: 20px; }
+
+  .game {
+    margin-bottom: 35px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .progress-bar-container {
+    width: 60%;
+    height: 25px;
+    background-color: #ff4d4d;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #4CAF50;
+    transition: width 0.3s ease;
+  }
+
+  #popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+  }
+
+  #popup {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    width: 380px;
+    max-width: 90%;
+  }
+
+  #popup h2 { margin-top: 0; color: #004aad; }
+
+  input[type="number"] {
+    width: 70px;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #555;
+    background-color: #1e1e1e;
+    color: white;
+  }
+
+  button {
+    background-color: #004aad;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover { background-color: #004aad; }
+
+  #closePopup { background-color: #b33a3a; float: right; }
+
+  footer {
+    background-color: #1f2937;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+  }
+</style>
+</head>
+
+<body>
+
+<header>Tutorial Whizz</header>
+
+<nav>
+  <a href="home.html">Home</a>
+  <a id="profileLink" href="profile.html">Profile</a>
+  <a href="faq.html">FAQ</a>
+  <a href="community.html">Community</a>
+  <a href="feedback.html">Feedback</a>
+  <a href="about.html">Progress Tracker</a>
+
+  <div id="userStatus">
+    <span id="welcomeText">Welcome, Guest!</span>
+    <button id="logoutBtn">Log Out</button>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Your Game Progress (Based on 5-Game K/D/A)</h1>
+  <div id="games"></div>
+</div>
+
+<div id="popupOverlay">
+  <div id="popup">
+    <button id="closePopup">X</button>
+    <h2 id="popupGameName"></h2>
+    <div id="popupInputs"></div>
+    <br>
+    <button id="saveKDA">Save</button>
+  </div>
+</div>
+
+<script>
+const games = ["CSGO", "Valorant", "Marvel Rivals", "Overwatch 2", "Battlefield 6"];
+const progressKey = "userProgressKDA5";
+
+let currentGame = null;
+let sessionData = null;
+
+window.onload = function() {
+  fetch("/session-check")
+    .then(res => res.json())
+    .then(data => {
+      sessionData = data;
+
+      const profileLink = document.getElementById('profileLink');
+      const welcomeText = document.getElementById('welcomeText');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      if (data.logged_in) {
+        welcomeText.textContent = `Welcome, ${data.username}!`;
+        logoutBtn.style.display = 'inline-block';
+        profileLink.href = 'profile.html';
+        logoutBtn.onclick = () => fetch("/logout").then(() => window.location.reload());
+      } else {
+        alert("Please log in to track your progress!");
+        window.location.href = "/login.html";
+      }
+
+      loadKDAProgress();
+    });
+
+  document.getElementById("closePopup").onclick = () => {
+    document.getElementById("popupOverlay").style.display = "none";
+  };
+
+  const createGameHTML = game => `
+    <div class="game" data-game="${game}">
+      <h2>${game}</h2>
+      <button onclick="openPopup('${game}')">Update KDA</button>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="bar-${game}"></div>
+      </div>
+    </div>
+  `;
+  document.getElementById("games").innerHTML = games.map(createGameHTML).join("");
+
+  window.openPopup = function(game) {
+    currentGame = game;
+    document.getElementById("popupGameName").innerText = game;
+
+    const allData = JSON.parse(localStorage.getItem(progressKey)) || {};
+    const saved = allData[sessionData.email]?.[game] || {};
+
+    let inputsHTML = "";
+    for (let i = 1; i <= 5; i++) {
+      inputsHTML += `
+        <div>
+          <strong>Game ${i}</strong><br>
+          K: <input type="number" id="kills${i}" min="0" value="${saved[`kills${i}`] ?? 0}">
+          D: <input type="number" id="deaths${i}" min="1" value="${saved[`deaths${i}`] ?? 1}">
+          A: <input type="number" id="assists${i}" min="0" value="${saved[`assists${i}`] ?? 0}">
+        </div><br>
+      `;
+    }
+    document.getElementById("popupInputs").innerHTML = inputsHTML;
+    document.getElementById("popupOverlay").style.display = "flex";
+  };
+
+  document.getElementById("saveKDA").onclick = function() {
+    const allData = JSON.parse(localStorage.getItem(progressKey)) || {};
+    if (!allData[sessionData.email]) allData[sessionData.email] = {};
+
+    let totalKills = 0, totalDeaths = 0, totalAssists = 0;
+    const saveObj = {};
+
+    for (let i = 1; i <= 5; i++) {
+      const k = Number(document.getElementById(`kills${i}`).value);
+      const d = Number(document.getElementById(`deaths${i}`).value);
+      const a = Number(document.getElementById(`assists${i}`).value);
+
+      saveObj[`kills${i}`] = k;
+      saveObj[`deaths${i}`] = d;
+      saveObj[`assists${i}`] = a;
+
+      totalKills += k; totalDeaths += d; totalAssists += a;
+    }
+
+    const avgKDA = (totalKills + totalAssists)/totalDeaths;
+    const progress = kdaToProgress(avgKDA);
+    document.getElementById(`bar-${currentGame}`).style.width = progress + "%";
+
+    allData[sessionData.email][currentGame] = saveObj;
+    localStorage.setItem(progressKey, JSON.stringify(allData));
+    document.getElementById("popupOverlay").style.display = "none";
+  };
+
+  function kdaToProgress(kda) {
+    if (kda <= 1) return kda*25;
+    if (kda <= 2) return 25 + (kda-1)*25;
+    if (kda <= 3) return 50 + (kda-2)*25;
+    return 75 + Math.min((kda-3)*25, 25);
+  }
+
+  function loadKDAProgress() {
+    if (!sessionData) return;
+    const allData = JSON.parse(localStorage.getItem(progressKey)) || {};
+    const saved = allData[sessionData.email] || {};
+
+    games.forEach(game => {
+      let totalK = 0, totalD = 0, totalA = 0;
+      for (let i=1;i<=5;i++){
+        totalK += saved[game]?.[`kills${i}`] ?? 0;
+        totalD += saved[game]?.[`deaths${i}`] ?? 1;
+        totalA += saved[game]?.[`assists${i}`] ?? 0;
+      }
+      const avgKDA = (totalK + totalA)/totalD;
+      const progress = kdaToProgress(avgKDA);
+      document.getElementById(`bar-${game}`).style.width = progress+"%";
+    });
+  }
+};
+</script>
+
+<footer>
+  © 2025 Tutorial Whizz — All Rights Reserved
+</footer>
+</body>
+</html>

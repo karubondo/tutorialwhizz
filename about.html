@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Tutorial Whizz</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #004aad;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 350px;
+      height: 100%;
+      background-image: url('images/whizz.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 350px;
+      height: 100%;
+      background-image: url('images/whizz.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      pointer-events: none;
+      z-index: 0;
+      transform: scaleX(-1);
+    }
+
+    header {
+      background-color: #1f2937;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      z-index: 2;
+      position: relative;
+    }
+
+    nav {
+      width: 100%;
+      background-color: #1f2937;
+      padding: 10px 0;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    nav a:hover { text-decoration: underline; }
+
+    #userStatus {
+      position: fixed;
+      top: 15px;
+      right: 25px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: bold;
+    }
+
+    #logoutBtn {
+      padding: 5px 10px;
+      background-color: #0e100e;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      display: none;
+    }
+
+    #logoutBtn:hover {
+      background-color: #111611;
+    }
+
+    main {
+      flex: 1;
+      padding: 40px;
+      max-width: 900px;
+      margin: auto;
+      background-color: #121212;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      color: #ffffff;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer {
+      background-color: #1f2937;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      z-index: 2;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Tutorial Whizz</h1>
+  <p>Your ultimate guide to mastering FPS games</p>
+</header>
+
+<nav>
+  <a href="home.html">Home</a>
+  <a id="profileLink" href="profile.html">Profile</a>
+  <a id="loginLink" href="login.html">Login</a>
+  <a id="signupLink" href="signup.html">Sign Up</a>
+  <a href="faq.html">FAQ</a>
+  <a href="community.html">Community</a>
+  <a href="feedback.html">Feedback</a>
+  <a href="progress.html">Progress Tracker</a>
+</nav>
+
+<div id="userStatus">
+  <span id="welcomeText">Welcome, Guest!</span>
+  <button id="logoutBtn">Log Out</button>
+</div>
+
+<main>
+  <h2>About Tutorial Whizz</h2>
+  <p>
+    Welcome to <strong>Tutorial Whizz</strong> — the ultimate hub for FPS players who want to sharpen their skills, dominate the competition, and learn from in-depth tutorials. 
+  </p>
+
+  <h2>Our Mission</h2>
+  <p>
+    Our mission is to make FPS learning fun, structured, and accessible to everyone.
+  </p>
+
+  <h2>Why Choose Us?</h2>
+  <ul>
+    <li>Expert-curated guides for Valorant, CS2, Overwatch and more.</li>
+    <li>Easy-to-follow tutorials.</li>
+    <li>Real skill development.</li>
+    <li>A community-driven learning approach.</li>
+  </ul>
+
+  <h2>Join the Whizz Community</h2>
+  <p>
+    Ready to improve your gameplay?  
+    <a href="signup.html" style="color:#2563eb; text-decoration: underline;">Create an account</a> or  
+    <a href="login.html" style="color:#2563eb; text-decoration: underline;">log in</a>.
+  </p>
+</main>
+
+<footer>
+  <p>&copy; 2025 Tutorial Whizz. All rights reserved.</p>
+</footer>
+
+<script>
+window.onload = function() {
+  fetch("/session-check")
+    .then(res => res.json())
+    .then(data => {
+      const loginLink = document.getElementById('loginLink');
+      const signupLink = document.getElementById('signupLink');
+      const profileLink = document.getElementById('profileLink');
+      const welcomeText = document.getElementById('welcomeText');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      if (data.logged_in) {
+        loginLink.style.display = 'none';
+        signupLink.style.display = 'none';
+        welcomeText.textContent = `Welcome, ${data.username}!`;
+        logoutBtn.style.display = 'inline-block';
+        profileLink.href = "profile.html";
+
+        logoutBtn.onclick = () => {
+          fetch("/logout").then(() => window.location.reload());
+        };
+      } else {
+        welcomeText.textContent = "Welcome, Guest!";
+        logoutBtn.style.display = 'none';
+        loginLink.style.display = 'inline';
+        signupLink.style.display = 'inline';
+        profileLink.href = "login.html";
+      }
+    });
+};
+</script>
+</body>
+</html>
